@@ -149,6 +149,9 @@ export default function Example() {
                   <button
                     type="button"
                     onClick={() => setSelectedDay(day)}
+                    style={{
+                      flexDirection: 'column'
+                    }}
                     className={classNames(
                       isEqual(day, selectedDay) && 'text-white',
                       !isEqual(day, selectedDay) &&
@@ -175,7 +178,7 @@ export default function Example() {
                     <time dateTime={format(day, 'yyyy-MM-dd')}>
                       {format(day, 'd')}
                     </time>
-                    <div>
+                    <div style={{ display: 'flex', gap: '2px' }}>
                     {meetingsByDay[format(day, 'yyyy-MM-dd')] &&
                       Array.from(Array(meetingsByDay[format(day, 'yyyy-MM-dd')]), (_, i) => (
                         
