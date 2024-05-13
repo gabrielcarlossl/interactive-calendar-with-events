@@ -25,3 +25,11 @@
     background-color: #9ca3af2d;
     border-radius: 50%;
 }
+
+.weekDays > div {
+    margin-right: 5px;
+}
+
+.weekDays > div:last-of-type {
+    margin-right: 0px;
+}

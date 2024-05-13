@@ -141,7 +141,7 @@ export default function Example() {
                 </button>
               </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', marginTop: '1.5rem', fontSize: '0.875rem', lineHeight: '1.25rem', color: '#6B7280' }}>
+            <div className='weekDays' style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', marginTop: '1.5rem', fontSize: '0.875rem', lineHeight: '1.25rem', color: '#6B7280' }}>
               <div>S</div>
               <div>M</div>
               <div>T</div>
@@ -150,46 +150,75 @@ export default function Example() {
               <div>F</div>
               <div>S</div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', marginTop: '0.5rem', fontSize: '0.875rem', lineHeight: '1.25rem', color: '#4B5563' }}>
-              {days.map((day, dayIdx) => (
-                <div
-                  key={day.toString()}
-                  style={{
-                    gridColumn: dayIdx === 0 && colStartClasses[getDay(day)],
-                    padding: '0.375rem 0',
-                    textAlign: 'center'
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setSelectedDay(day)}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
+              marginTop: '0.5rem',
+              fontSize: '0.875rem',
+              lineHeight: '1.25rem',
+              color: '#4B5563',
+            }}
+            >
+              {days.map((day, dayIdx) => {
+
+                let colStartClasses = [
+                  '',
+                  'grid-column-start-2',
+                  'grid-column-start-3',
+                  'grid-column-start-4',
+                  'grid-column-start-5',
+                  'grid-column-start-6',
+                  'grid-column-start-7',
+                ];
+
+                let gridColumnStyle = {};
+                if (dayIdx === 0 && colStartClasses[getDay(day)]) {
+                  gridColumnStyle = {
+                    gridColumn: colStartClasses[getDay(day)],
+                  };
+                }
+
+                return (
+                  <div
+                    key={day.toString()}
                     style={{
-                      flexDirection: 'column',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '2rem',
-                      height: '2rem',
-                      borderRadius: '9999px',
-                      border: 'none',
-                      cursor: 'pointer',
-                      background: isEqual(day, selectedDay) ? (isToday(day) ? '#EF4444' : '#4B5563') : (isToday(day) ? '#FECACA' : (isSameMonth(day, firstDayCurrentMonth) ? '#F3F4F6' : '#E5E7EB')),
-                      color: isEqual(day, selectedDay) ? (isToday(day) ? '#FFFFFF' : '#FFFFFF') : (isToday(day) ? '#EF4444' : (isSameMonth(day, firstDayCurrentMonth) ? '#111827' : '#9CA3AF')),
-                      fontWeight: isEqual(day, selectedDay) || isToday(day) ? '600' : '400'
+                      ...gridColumnStyle,
+                      padding: '0.375rem 0',
+                      textAlign: 'center',
+                      marginInline: '-15px'
                     }}
                   >
-                    <time dateTime={format(day, 'yyyy-MM-dd')}>
-                      {format(day, 'd')}
-                    </time>
-                    <div style={{ display: 'flex', gap: '2px' }}>
-                      {meetingsByDay[format(day, 'yyyy-MM-dd')] &&
-                        Array.from(Array(meetingsByDay[format(day, 'yyyy-MM-dd')]), (_, i) => (
-                          <div key={i} style={{ width: '0.25rem', height: '0.25rem', borderRadius: '9999px', backgroundColor: '#60A5FA' }}></div>
-                        ))}
-                    </div>
-                  </button>
-                </div>
-              ))}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedDay(day)}
+                      style={{
+                        flexDirection: 'column',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '2rem',
+                        height: '2rem',
+                        borderRadius: '9999px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        background: isEqual(day, selectedDay) ? (isToday(day) ? '#EF4444' : '#4B5563') : (isToday(day) ? '#FECACA' : (isSameMonth(day, firstDayCurrentMonth) ? '#F3F4F6' : '#E5E7EB')),
+                        color: isEqual(day, selectedDay) ? (isToday(day) ? '#FFFFFF' : '#FFFFFF') : (isToday(day) ? '#EF4444' : (isSameMonth(day, firstDayCurrentMonth) ? '#111827' : '#9CA3AF')),
+                        fontWeight: isEqual(day, selectedDay) || isToday(day) ? '600' : '400'
+                      }}
+                    >
+                      <time dateTime={format(day, 'yyyy-MM-dd')}>
+                        {format(day, 'd')}
+                      </time>
+                      <div style={{ display: 'flex', gap: '2px' }}>
+                        {meetingsByDay[format(day, 'yyyy-MM-dd')] &&
+                          Array.from(Array(meetingsByDay[format(day, 'yyyy-MM-dd')]), (_, i) => (
+                            <div key={i} style={{ width: '0.25rem', height: '0.25rem', borderRadius: '9999px', backgroundColor: '#60A5FA' }}></div>
+                          ))}
+                      </div>
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <section style={{ marginTop: '1.5rem', paddingLeft: '2rem' }}>
@@ -259,13 +288,3 @@ function Meeting({ meeting }) {
     </li>
   )
 }
-
-let colStartClasses = [
-  '',
-  'grid-column-start-2',
-  'grid-column-start-3',
-  'grid-column-start-4',
-  'grid-column-start-5',
-  'grid-column-start-6',
-  'grid-column-start-7',
-]
