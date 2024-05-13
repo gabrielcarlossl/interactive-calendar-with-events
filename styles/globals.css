@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.months-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.prev-month-icon{
+    padding: 3px 8px;
+
+}
+
+.prev-month-icon:hover{
+    background-color: #9ca3af2d;
+    border-radius: 50%;
+}
+.next-month-icon{
+    padding: 3px 8px;
+
+}
+
+.next-month-icon:hover{
+    background-color: #9ca3af2d;
+    border-radius: 50%;
+}
