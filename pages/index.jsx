@@ -127,6 +127,49 @@ export default function Example() {
     'col-start-6',
     'col-start-7',
   ]
+  function Meeting({ meeting }) {
+    let startDateTime = parseISO(meeting.startDatetime)
+    let endDateTime = parseISO(meeting.endDatetime)
+
+    return (
+      <li style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '0.5rem 1rem',
+        gap: '1rem',
+        borderRadius: '0.375rem',
+        '&:focus-within': {
+          backgroundColor: '#f3f4f6',
+        },
+        '&:hover': {
+          backgroundColor: '#f3f4f6',
+        }
+      }}>
+        <img
+          src={meeting.imageUrl}
+          alt=""
+          style={{
+            flex: 'none',
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '50%'
+          }}
+        />
+        <div style={{ flex: '1' }}>
+          <p style={{ color: '#1a202c' }}>{meeting.name}</p>
+          <p style={{ marginTop: '0.125rem' }}>
+            <time dateTime={meeting.startDatetime}>
+              {format(startDateTime, 'h:mm a')}
+            </time>{' '}
+            -{' '}
+            <time dateTime={meeting.endDatetime}>
+              {format(endDateTime, 'h:mm a')}
+            </time>
+          </p>
+        </div>
+      </li>
+    )
+  }
 
   return (
     <div style={{ paddingTop: '16px' }}>
@@ -185,13 +228,13 @@ export default function Example() {
               </button>
             </div>
             <div className="weekDaysContainer">
-              <div>S</div>
-              <div>M</div>
-              <div>T</div>
-              <div>W</div>
-              <div>T</div>
-              <div>F</div>
-              <div>S</div>
+              <div>Dom</div>
+              <div>Seg</div>
+              <div>Ter</div>
+              <div>Qua</div>
+              <div>Qui</div>
+              <div>Sex</div>
+              <div>Sab</div>
             </div>
             <div className="monthDaysContainer">
               {days.map((day, dayIdx) => (
@@ -209,7 +252,10 @@ export default function Example() {
                     type="button"
                     onClick={() => setSelectedDay(day)}
                     style={{
-                      flexDirection: 'column'
+                      flexDirection: 'column',
+                      '&:hover': {
+                        cursor: 'pointer'
+                      }
                     }}
                     className={classNames(
                       isEqual(day, selectedDay) && 'text-white',
@@ -286,49 +332,3 @@ export default function Example() {
     </div>
   )
 }
-
-function Meeting({ meeting }) {
-  let startDateTime = parseISO(meeting.startDatetime)
-  let endDateTime = parseISO(meeting.endDatetime)
-
-  return (
-    <li style={{
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0.5rem 1rem',
-      gap: '1rem',
-      borderRadius: '0.375rem',
-      '&:focus-within': {
-        backgroundColor: '#f3f4f6',
-      },
-      '&:hover': {
-        backgroundColor: '#f3f4f6',
-      }
-    }}>
-      <img
-        src={meeting.imageUrl}
-        alt=""
-        style={{
-          flex: 'none',
-          width: '2.5rem',
-          height: '2.5rem',
-          borderRadius: '50%'
-        }}
-      />
-      <div style={{flex: '1'}}>
-        <p  style={{ color: '#1a202c' }}>{meeting.name}</p>
-        <p style={{ marginTop: '0.125rem' }}>
-          <time dateTime={meeting.startDatetime}>
-            {format(startDateTime, 'h:mm a')}
-          </time>{' '}
-          -{' '}
-          <time dateTime={meeting.endDatetime}>
-            {format(endDateTime, 'h:mm a')}
-          </time>
-        </p>
-      </div>
-    </li>
-  )
-}
-
-
