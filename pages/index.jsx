@@ -103,32 +103,73 @@ export default function Example() {
   )
 
   return (
-    <div className="pt-16">
-      <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-4xl md:px-6">
-        <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
-          <div className="md:pr-14">
-            <div className="flex items-center">
-              <h2 className="flex-auto font-semibold text-gray-900">
+    <div style={{ paddingTop: '16px' }}>
+      <div className="container">
+        <div className="containerTwo">
+          <div className="containerThree">
+            <div style={{
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+              <h2 className="month">
                 {format(firstDayCurrentMonth, 'MMMM yyyy')}
               </h2>
               <button
                 type="button"
                 onClick={previousMonth}
-                className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="prev-month-btn"
               >
-                <span className="sr-only">Previous month</span>
-                <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
+                <span
+                  style={{
+                    position: 'absolute',
+                    width: '1px',
+                    height: '1px',
+                    padding: 0,
+                    margin: '-1px',
+                    overflow: 'hidden',
+                    clip: 'rect(0, 0, 0, 0)',
+                    whiteSpace: 'nowrap',
+                    borderWidth: 0
+                  }}
+                >
+                  Previous month
+                </span>
+                <ChevronLeftIcon
+                  style={{
+                    width: '1.25rem',
+                    height: '1.25rem'
+                  }}
+                  aria-hidden="true" />
               </button>
               <button
                 onClick={nextMonth}
                 type="button"
-                className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                className="next-month-btn"
               >
-                <span className="sr-only">Next month</span>
-                <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
+                <span style={{
+                  position: 'absolute',
+                  width: '1px',
+                  height: '1px',
+                  padding: 0,
+                  margin: '-1px',
+                  overflow: 'hidden',
+                  clip: 'rect(0, 0, 0, 0)',
+                  whiteSpace: 'nowrap',
+                  borderWidth: 0
+                }}
+                >
+                  Next month
+                </span>
+                <ChevronRightIcon
+                  aria-hidden="true"
+                  style={{
+                    width: '1.25rem',
+                    height: '1.25rem'
+                  }}
+                />
               </button>
             </div>
-            <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
+            <div className="weekDaysContainer">
               <div>S</div>
               <div>M</div>
               <div>T</div>
@@ -137,7 +178,7 @@ export default function Example() {
               <div>F</div>
               <div>S</div>
             </div>
-            <div className="grid grid-cols-7 mt-2 text-sm">
+            <div className="monthDaysContainer">
               {days.map((day, dayIdx) => (
                 <div
                   key={day.toString()}
@@ -179,13 +220,13 @@ export default function Example() {
                       {format(day, 'd')}
                     </time>
                     <div style={{ display: 'flex', gap: '2px' }}>
-                    {meetingsByDay[format(day, 'yyyy-MM-dd')] &&
-                      Array.from(Array(meetingsByDay[format(day, 'yyyy-MM-dd')]), (_, i) => (
-                        
+                      {meetingsByDay[format(day, 'yyyy-MM-dd')] &&
+                        Array.from(Array(meetingsByDay[format(day, 'yyyy-MM-dd')]), (_, i) => (
+
 
                           <div key={i} className="w-1 h-1 rounded-full bg-sky-500"></div>
-                        
-                      ))}
+
+                        ))}
                     </div>
                   </button>
                 </div>
