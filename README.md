@@ -1,4 +1,4 @@
-# Building an Interactive Calendar with Tailwind UI, React and date-fns
+# Building an Interactive Calendar with React and date-fns
 
 ## Running the demo locally
 

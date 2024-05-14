@@ -41,6 +41,22 @@ const meetings = [
     endDatetime: '2024-05-20T18:30',
   },
   {
+    id: 33,
+    name: 'Dries Vincent',
+    imageUrl:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    startDatetime: '2024-05-20T17:00',
+    endDatetime: '2024-05-20T18:30',
+  },
+  {
+    id: 333,
+    name: 'Dries Vincent',
+    imageUrl:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    startDatetime: '2024-05-20T17:00',
+    endDatetime: '2024-05-20T18:30',
+  },
+  {
     id: 4,
     name: 'Leslie Alexander',
     imageUrl:
@@ -199,23 +215,23 @@ export default function Example() {
                       isEqual(day, selectedDay) && 'text-white',
                       !isEqual(day, selectedDay) &&
                       isToday(day) &&
-                      'text-red-500',
+                      'text-red',
                       !isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       isSameMonth(day, firstDayCurrentMonth) &&
-                      'text-gray-900',
+                      'text-gray900',
                       !isEqual(day, selectedDay) &&
                       !isToday(day) &&
                       !isSameMonth(day, firstDayCurrentMonth) &&
-                      'text-gray-400',
-                      isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
+                      'text-gray400',
+                      isEqual(day, selectedDay) && isToday(day) && 'bg-red',
                       isEqual(day, selectedDay) &&
                       !isToday(day) &&
-                      'bg-gray-900',
-                      !isEqual(day, selectedDay) && 'hover:bg-gray-200',
+                      'bg-gray900',
+                      !isEqual(day, selectedDay) && 'bg-hover',
                       (isEqual(day, selectedDay) || isToday(day)) &&
                       'font-semibold',
-                      'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
+                      'styles'
                     )}
                   >
                     <time dateTime={format(day, 'yyyy-MM-dd')}>
@@ -267,7 +283,7 @@ export default function Example() {
           </section>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 
