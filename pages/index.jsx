@@ -181,9 +181,12 @@ export default function Example() {
               {days.map((day, dayIdx) => (
                 <div
                   key={day.toString()}
+                  style={{
+                    paddingTop: '0.375rem',
+                    paddingBottom: '0.375rem'
+                  }}
                   className={classNames(
-                    dayIdx === 0 && colStartClasses[getDay(day)],
-                    'py-1.5'
+                    dayIdx === 0 && colStartClasses[getDay(day)]
                   )}
                 >
                   <button
@@ -241,13 +244,18 @@ export default function Example() {
               marginTop: '0',
             }
           }}>
-            <h2 className="font-semibold text-gray-900">
+            <h2
+              style={{
+                fontWeight: 600,
+                color: '#1a202c'
+              }}
+            >
               Schedule for{' '}
               <time dateTime={format(selectedDay, 'yyyy-MM-dd')}>
                 {format(selectedDay, 'MMM dd, yyy')}
               </time>
             </h2>
-            <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
+            <ol style={{ marginTop: '1rem', lineHeight: 1.5, fontSize: '0.875rem', color: '#6b7280' }}>
               {selectedDayMeetings.length > 0 ? (
                 selectedDayMeetings.map((meeting) => (
                   <Meeting meeting={meeting} key={meeting.id} />
@@ -259,7 +267,7 @@ export default function Example() {
           </section>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
@@ -268,15 +276,32 @@ function Meeting({ meeting }) {
   let endDateTime = parseISO(meeting.endDatetime)
 
   return (
-    <li className="flex items-center px-4 py-2 space-x-4 group rounded-xl focus-within:bg-gray-100 hover:bg-gray-100">
+    <li style={{
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0.5rem 1rem',
+      gap: '1rem',
+      borderRadius: '0.375rem',
+      '&:focus-within': {
+        backgroundColor: '#f3f4f6',
+      },
+      '&:hover': {
+        backgroundColor: '#f3f4f6',
+      }
+    }}>
       <img
         src={meeting.imageUrl}
         alt=""
-        className="flex-none w-10 h-10 rounded-full"
+        style={{
+          flex: 'none',
+          width: '2.5rem',
+          height: '2.5rem',
+          borderRadius: '50%'
+        }}
       />
-      <div className="flex-auto">
-        <p className="text-gray-900">{meeting.name}</p>
-        <p className="mt-0.5">
+      <div style={{flex: '1'}}>
+        <p  style={{ color: '#1a202c' }}>{meeting.name}</p>
+        <p style={{ marginTop: '0.125rem' }}>
           <time dateTime={meeting.startDatetime}>
             {format(startDateTime, 'h:mm a')}
           </time>{' '}
