@@ -1,6 +1,4 @@
-import { Menu, Transition } from '@headlessui/react'
-import { DotsVerticalIcon } from '@heroicons/react/outline'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+
 import {
   add,
   eachDayOfInterval,
@@ -15,7 +13,7 @@ import {
   parseISO,
   startOfToday,
 } from 'date-fns'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 
 const meetings = [
   {
@@ -70,6 +68,8 @@ export default function Example() {
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
   let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
 
+  console.log('firstDayCurrentMonth', firstDayCurrentMonth)
+
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
@@ -101,6 +101,16 @@ export default function Example() {
   let selectedDayMeetings = meetings.filter((meeting) =>
     isSameDay(parseISO(meeting.startDatetime), selectedDay)
   )
+
+  let colStartClasses = [
+    '',
+    'col-start-2',
+    'col-start-3',
+    'col-start-4',
+    'col-start-5',
+    'col-start-6',
+    'col-start-7',
+  ]
 
   return (
     <div style={{ paddingTop: '16px' }}>
@@ -134,12 +144,7 @@ export default function Example() {
                 >
                   Previous month
                 </span>
-                <ChevronLeftIcon
-                  style={{
-                    width: '1.25rem',
-                    height: '1.25rem'
-                  }}
-                  aria-hidden="true" />
+                &lt;
               </button>
               <button
                 onClick={nextMonth}
@@ -160,13 +165,7 @@ export default function Example() {
                 >
                   Next month
                 </span>
-                <ChevronRightIcon
-                  aria-hidden="true"
-                  style={{
-                    width: '1.25rem',
-                    height: '1.25rem'
-                  }}
-                />
+                &gt;
               </button>
             </div>
             <div className="weekDaysContainer">
@@ -222,10 +221,12 @@ export default function Example() {
                     <div style={{ display: 'flex', gap: '2px' }}>
                       {meetingsByDay[format(day, 'yyyy-MM-dd')] &&
                         Array.from(Array(meetingsByDay[format(day, 'yyyy-MM-dd')]), (_, i) => (
-
-
-                          <div key={i} className="w-1 h-1 rounded-full bg-sky-500"></div>
-
+                          <div key={i} style={{
+                            width: '0.25rem',
+                            height: '0.25rem',
+                            borderRadius: '50%',
+                            backgroundColor: '#60a5fa'
+                          }} />
                         ))}
                     </div>
                   </button>
@@ -233,7 +234,13 @@ export default function Example() {
               ))}
             </div>
           </div>
-          <section className="mt-12 md:mt-0 md:pl-14">
+          <section style={{
+            marginTop: '3rem',
+            paddingLeft: '3.5rem',
+            '@media (min-width: 768px)': {
+              marginTop: '0',
+            }
+          }}>
             <h2 className="font-semibold text-gray-900">
               Schedule for{' '}
               <time dateTime={format(selectedDay, 'yyyy-MM-dd')}>
@@ -279,68 +286,8 @@ function Meeting({ meeting }) {
           </time>
         </p>
       </div>
-      <Menu
-        as="div"
-        className="relative opacity-0 focus-within:opacity-100 group-hover:opacity-100"
-      >
-        <div>
-          <Menu.Button className="-m-2 flex items-center rounded-full p-1.5 text-gray-500 hover:text-gray-600">
-            <span className="sr-only">Open options</span>
-            <DotsVerticalIcon className="w-6 h-6" aria-hidden="true" />
-          </Menu.Button>
-        </div>
-
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right bg-white rounded-md shadow-lg w-36 ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
-                    )}
-                  >
-                    Edit
-                  </a>
-                )}
-              </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <a
-                    href="#"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2 text-sm'
-                    )}
-                  >
-                    Cancel
-                  </a>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
     </li>
   )
 }
 
-let colStartClasses = [
-  '',
-  'col-start-2',
-  'col-start-3',
-  'col-start-4',
-  'col-start-5',
-  'col-start-6',
-  'col-start-7',
-]
+
